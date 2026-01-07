@@ -1,0 +1,44 @@
+package com.github.sddisk.usernotesbackend.api.controller;
+
+import com.github.sddisk.usernotesbackend.api.dto.UserMapper;
+import com.github.sddisk.usernotesbackend.api.dto.UserResponseDto;
+import com.github.sddisk.usernotesbackend.service.UserService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
+
+@RestController
+@RequestMapping("/users")
+@AllArgsConstructor
+public class UserController {
+    private final UserService userService;
+
+    // @GetMapping("/me")
+    // @ResponseStatus(HttpStatus.OK)
+
+
+    @GetMapping("/all")
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserResponseDto> getAll() {
+        return userService.getAll().stream()
+                .map(UserMapper::toDto)
+                .toList();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserResponseDto getById(@PathVariable UUID id) {
+        var user = userService.getById(id);
+        return UserMapper.toDto(user);
+    }
+
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable UUID id) {
+        userService.deleteById(id);
+    }
+}
