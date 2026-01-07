@@ -4,3 +4,7 @@ spring:
   datasource:
     username: sa
     password:
+  security:
+    user:
+      name: user
+      password: password
