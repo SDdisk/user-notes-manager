@@ -1,2 +1,8 @@
+# project
 .idea
 user-notes-manager.iml
+
+## user-notes-backend
+user-notes-backend/.gitignore
+user-notes-backend/.gitattributes
+user-notes-backend/user-notes-backend.iml
