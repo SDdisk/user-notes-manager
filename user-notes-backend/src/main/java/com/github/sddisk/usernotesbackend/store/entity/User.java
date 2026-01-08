@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.NaturalId;
 
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -23,4 +24,5 @@ public class User {
     @NaturalId
     private String email;
     private String password;
+    private Set<String> roles;
 }
