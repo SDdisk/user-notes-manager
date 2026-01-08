@@ -30,3 +30,8 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
+
+jwt:
+  secret-key: "very-scary-secret-key"
+  access-lifetime: 60000
+  refresh-lifetime: 24000000
