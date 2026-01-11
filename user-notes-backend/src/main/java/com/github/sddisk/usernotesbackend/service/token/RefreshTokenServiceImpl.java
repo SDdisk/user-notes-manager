@@ -13,7 +13,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
     @Override
     public void createRefreshTokenCookie(String token, HttpServletResponse response) {
-        Cookie cookie = new Cookie("refreshCookie", token);
+        Cookie cookie = new Cookie("refreshToken", token);
         cookie.setMaxAge((int) jwtTokenProvider.extractExpiration(token).getTime());
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
@@ -23,7 +23,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
     @Override
     public void deleteRefreshTokenCookie(HttpServletResponse response) {
-        Cookie cookie = new Cookie("refreshCookie", "");
+        Cookie cookie = new Cookie("refreshToken", "");
         cookie.setMaxAge(0);
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
