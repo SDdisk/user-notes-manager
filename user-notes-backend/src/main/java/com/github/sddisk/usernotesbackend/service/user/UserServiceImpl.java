@@ -2,10 +2,8 @@ package com.github.sddisk.usernotesbackend.service.user;
 
 import com.github.sddisk.usernotesbackend.store.entity.User;
 import com.github.sddisk.usernotesbackend.store.repository.UserRepository;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,9 +27,8 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("User with email " + user.getEmail() + "already exists"); // todo custom exception
         }
 
-        user.setPassword(
-                passwordEncoder.encode(user.getPassword())
-        );
+        hashPassword(user);
+        setRoleUser(user);
 
         return userRepository.save(user);
     }
@@ -54,5 +51,17 @@ public class UserServiceImpl implements UserService {
     public void deleteById(UUID id) {
         log.info("Deleting user with id: {}", id);
         userRepository.deleteById(id);
+    }
+
+    private void hashPassword(User user) {
+        user.setPassword(
+                passwordEncoder.encode(user.getPassword())
+        );
+    }
+
+    private void setRoleUser(User user) {
+        Set<String> roles = new HashSet<>();
+        roles.add("USER");
+        user.setRoles(roles);
     }
 }
