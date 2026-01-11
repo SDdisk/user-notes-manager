@@ -8,6 +8,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Getter @Setter
 public class JwtProperties {
     private String secretKey;
-    private String accessLifetime;
-    private String refreshLifetime;
+    private Long accessLifetime;
+    private Long refreshLifetime;
 }
