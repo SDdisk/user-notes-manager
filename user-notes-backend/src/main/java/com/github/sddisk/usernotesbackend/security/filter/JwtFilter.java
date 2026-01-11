@@ -41,7 +41,7 @@ public class JwtFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) throws ServletException, IOException {
         extractTokenFromHttpRequest(request).ifPresent(token -> {
-            if (jwtTokenProvider.isTokenValid(token) && SecurityContextHolder.getContext().getAuthentication() == null) {
+            if (jwtTokenProvider.isTokenValid(token) && emptySecurityContext()) {
                 var email = jwtTokenProvider.extractEmail(token);
                 var userDetails = userDetailsService.loadUserByUsername(email);
 
@@ -60,6 +60,10 @@ public class JwtFilter extends OncePerRequestFilter {
         if (header == null || !header.startsWith("Bearer ")) return Optional.empty();
 
         return Optional.of(header.substring(7));
+    }
+
+    private boolean emptySecurityContext() {
+        return SecurityContextHolder.getContext().getAuthentication() == null;
     }
 
     private void createAuthentication(UserDetails userDetails, HttpServletRequest req) {
@@ -95,4 +99,5 @@ public class JwtFilter extends OncePerRequestFilter {
             );
         }
     }
+
 }
