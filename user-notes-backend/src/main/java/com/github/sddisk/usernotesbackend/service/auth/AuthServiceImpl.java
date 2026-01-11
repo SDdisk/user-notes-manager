@@ -5,6 +5,7 @@ import com.github.sddisk.usernotesbackend.api.dto.auth.LoginRequestDto;
 import com.github.sddisk.usernotesbackend.api.dto.auth.RegisterRequestDto;
 import com.github.sddisk.usernotesbackend.api.dto.user.UserMapper;
 import com.github.sddisk.usernotesbackend.security.provider.JwtTokenProvider;
+import com.github.sddisk.usernotesbackend.service.token.RefreshTokenService;
 import com.github.sddisk.usernotesbackend.service.user.UserService;
 import com.github.sddisk.usernotesbackend.store.entity.User;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ public class AuthServiceImpl implements AuthService {
     private final UserService userService;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
+    private final RefreshTokenService refreshTokenService;
 
     @Override
     public AuthResponse register(RegisterRequestDto registerDto, HttpServletResponse response) {
@@ -30,8 +32,9 @@ public class AuthServiceImpl implements AuthService {
         var saved = userService.save(user);
 
         var accessToken = jwtTokenProvider.generateAccessToken(saved.getEmail());
+        var refreshToken = jwtTokenProvider.generateRefreshToken(saved.getEmail());
 
-        // create refresh cookie
+        refreshTokenService.createRefreshTokenCookie(refreshToken, response);
 
         log.info("User successfully registered");
         return new AuthResponse(
@@ -60,14 +63,21 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void logout(HttpServletResponse response) {
-        // todo delete refresh token cookie
+        log.info("Logout request");
+        refreshTokenService.deleteRefreshTokenCookie(response);
+        log.info("Successfully logout");
     }
 
     @Override
     public AuthResponse refreshToken(String refreshToken) {
-        // mock
+        log.info("Refresh token request");
+        var email = jwtTokenProvider.extractEmail(refreshToken);
+
+        var accessToken = jwtTokenProvider.generateAccessToken(email);
+
+        log.info("New access token generated");
         return new AuthResponse(
-                "temporary disabled"
+                accessToken
         );
     }
 }
