@@ -1,4 +1,4 @@
-package com.github.sddisk.usernotesbackend.jwt;
+package com.github.sddisk.usernotesbackend.config.properties.jwt;
 
 import lombok.Getter;
 import lombok.Setter;

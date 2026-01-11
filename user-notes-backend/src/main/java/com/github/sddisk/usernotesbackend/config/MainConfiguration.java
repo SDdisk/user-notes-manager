@@ -1,6 +1,6 @@
 package com.github.sddisk.usernotesbackend.config;
 
-import com.github.sddisk.usernotesbackend.jwt.JwtProperties;
+import com.github.sddisk.usernotesbackend.config.properties.jwt.JwtProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
