@@ -19,6 +19,11 @@ public class UserController {
     // @GetMapping("/me")
     // @ResponseStatus(HttpStatus.OK)
 
+    @GetMapping("/public")
+    @ResponseStatus(HttpStatus.OK)
+    public String publicMethod() {
+        return "success";
+    }
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
@@ -34,7 +39,6 @@ public class UserController {
         var user = userService.getById(id);
         return UserMapper.toDto(user);
     }
-
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
