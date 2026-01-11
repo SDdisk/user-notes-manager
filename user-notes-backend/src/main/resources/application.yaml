@@ -32,6 +32,6 @@ spring:
         show_sql: true
 
 jwt:
-  secret-key: "very-scary-secret-key"
+  secret-key: "very-scary-secret-G8K7USA78JGEAw78ujeawtgr78UJHATEw78juhnaetW87NUJTAEW87juhatew8JU7H87UJH"
   access-lifetime: 60000
   refresh-lifetime: 24000000
