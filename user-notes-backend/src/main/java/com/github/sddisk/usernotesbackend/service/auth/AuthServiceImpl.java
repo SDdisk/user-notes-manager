@@ -54,6 +54,9 @@ public class AuthServiceImpl implements AuthService {
         );
 
         var accessToken = jwtTokenProvider.generateAccessToken(loginDto.email());
+        var refreshToken = jwtTokenProvider.generateRefreshToken(loginDto.email());
+
+        refreshTokenService.createRefreshTokenCookie(refreshToken, response);
 
         log.info("User successfully login");
         return new AuthResponse(
