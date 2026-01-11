@@ -5,6 +5,7 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.impl.lang.Function;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
+import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -23,9 +24,14 @@ public class JwtTokenProviderImpl implements JwtTokenProvider {
     private final JwtProperties jwtProperties;
 
     @Getter @Setter
-    private SecretKey secretKey = Keys.hmacShaKeyFor(
-            jwtProperties.getSecretKey().getBytes()
-    );
+    private SecretKey secretKey;
+
+    @PostConstruct
+    public void init() {
+        secretKey = Keys.hmacShaKeyFor(
+                jwtProperties.getSecretKey().getBytes()
+        );
+    }
 
     private Date createAccessExpirationTime() {
         return new Date(jwtProperties.getAccessLifetime() + currentTimeMillis());
