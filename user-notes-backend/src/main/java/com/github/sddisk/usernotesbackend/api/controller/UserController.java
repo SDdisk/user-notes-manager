@@ -1,8 +1,8 @@
 package com.github.sddisk.usernotesbackend.api.controller;
 
-import com.github.sddisk.usernotesbackend.api.dto.UserMapper;
-import com.github.sddisk.usernotesbackend.api.dto.UserResponseDto;
-import com.github.sddisk.usernotesbackend.service.UserService;
+import com.github.sddisk.usernotesbackend.api.dto.user.UserMapper;
+import com.github.sddisk.usernotesbackend.api.dto.user.UserResponseDto;
+import com.github.sddisk.usernotesbackend.service.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
