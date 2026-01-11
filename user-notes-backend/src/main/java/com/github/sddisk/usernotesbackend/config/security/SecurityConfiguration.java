@@ -40,7 +40,9 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
+                        .requestMatchers("/users/public/**").permitAll()
+                        .requestMatchers("/users/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(sm -> sm
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
