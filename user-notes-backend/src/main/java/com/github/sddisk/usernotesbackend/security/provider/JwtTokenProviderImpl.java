@@ -4,7 +4,6 @@ import com.github.sddisk.usernotesbackend.config.properties.jwt.JwtProperties;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.impl.lang.Function;
 import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -96,29 +95,15 @@ public class JwtTokenProviderImpl implements JwtTokenProvider {
     @Override
     public boolean isTokenValid(String token) {
         if (token == null || token.trim().isEmpty()) return false;
-        try {
-            // parse once
-            var claims = parseClaims(token);
 
-            if (getExpiration(claims).before(new Date())) return false;
+        var claims = parseClaims(token);
 
-            String email = getSubject(claims);
-            if (email == null || email.isEmpty()) return false;
+        if (getExpiration(claims).before(new Date())) return false;
 
-            return true;
-        } catch (ExpiredJwtException e) {
-            log.info("Token expired: {}", e.getMessage());
-            return false;
-        } catch (MalformedJwtException e) {
-            log.warn("Invalid token format: {}", e.getMessage());
-            return false;
-        } catch (SignatureException e) {
-            log.warn("Invalid signature: {}", e.getMessage());
-            return false;
-        } catch (JwtException | IllegalArgumentException e) {
-            log.warn("Invalid token: {}", e.getMessage());
-            return false;
-        }
+        String email = getSubject(claims);
+        if (email == null || email.isEmpty()) return false;
+
+        return true;
     }
 
     @Override

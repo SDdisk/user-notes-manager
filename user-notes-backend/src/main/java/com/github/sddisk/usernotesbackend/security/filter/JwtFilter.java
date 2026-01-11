@@ -9,7 +9,6 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.WebConnection;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,7 +17,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -34,24 +32,28 @@ public class JwtFilter extends OncePerRequestFilter {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserDetailsService userDetailsService;
 
+
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
-        extractTokenFromHttpRequest(request).ifPresent(token -> {
-            if (jwtTokenProvider.isTokenValid(token) && emptySecurityContext()) {
-                var email = jwtTokenProvider.extractEmail(token);
-                var userDetails = userDetailsService.loadUserByUsername(email);
+        try {
+            extractTokenFromHttpRequest(request).ifPresent(token -> {
+                if (jwtTokenProvider.isTokenValid(token) && emptySecurityContext()) {
+                    var email = jwtTokenProvider.extractEmail(token);
+                    var userDetails = userDetailsService.loadUserByUsername(email);
 
-                createAuthentication(userDetails, request);
-            } else {
-                unauthorizeResponse(response);
-            }
-        });
+                    createAuthentication(userDetails, request);
+                }
+            });
 
-        filterChain.doFilter(request, response);
+            filterChain.doFilter(request, response);
+        } catch (ExpiredJwtException | MalformedJwtException | SignatureException | UnsupportedJwtException e) {
+            log.error("Handled {} with message: {}", e.getClass().getName(), e.getMessage());
+            unauthorizeResponse(response, e);
+        }
     }
 
     private Optional<String> extractTokenFromHttpRequest(HttpServletRequest request) {
@@ -75,29 +77,20 @@ public class JwtFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(auth);
     }
 
-    private void unauthorizeResponse(HttpServletResponse response) {
-        try {
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            response.setContentType("application/json");
-            PrintWriter writer = response.getWriter();
-            String message = "Bad authorization token";
-            String jsonResponse = "{\"message\": \"" + message +
-                    "\", \"timeStamp\": \"" + System.currentTimeMillis() + "\"}";
-            writer.write(jsonResponse);
-            writer.flush();
+    private void unauthorizeResponse(HttpServletResponse response, Exception e) throws IOException {
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        response.setContentType("application/json");
+        PrintWriter writer = response.getWriter();
+        String jsonResponse = "{\"message\": \"" + e.getMessage() +
+                "\", \"timeStamp\": \"" + System.currentTimeMillis() + "\"}";
+        writer.write(jsonResponse);
+        writer.flush();
 
-            log.error(
-                    "Send response {} with status {}",
-                    jsonResponse,
-                    HttpStatus.UNAUTHORIZED.value()
-            );
-        } catch (IOException e) {
-            log.error(
-                    "Caught exception {} with message: {}",
-                    e.getClass().getSimpleName(),
-                    e.getMessage()
-            );
-        }
+        log.error(
+                "Send response {} with status {}",
+                jsonResponse,
+                HttpStatus.UNAUTHORIZED.value()
+        );
     }
 
 }
