@@ -1,4 +1,4 @@
-package com.github.sddisk.usernotesbackend.security;
+package com.github.sddisk.usernotesbackend.security.adapter;
 
 import com.github.sddisk.usernotesbackend.store.entity.User;
 import lombok.RequiredArgsConstructor;

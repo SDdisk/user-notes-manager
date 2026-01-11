@@ -1,5 +1,6 @@
-package com.github.sddisk.usernotesbackend.security;
+package com.github.sddisk.usernotesbackend.security.service;
 
+import com.github.sddisk.usernotesbackend.security.adapter.UserDetailsAdapter;
 import com.github.sddisk.usernotesbackend.store.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
