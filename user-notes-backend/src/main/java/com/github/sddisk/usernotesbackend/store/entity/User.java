@@ -15,8 +15,8 @@ import java.util.UUID;
 @EqualsAndHashCode(of = "email")
 @ToString(exclude = "password")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @Id @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "user_id")
     private UUID id;
 
     // cred
