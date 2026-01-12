@@ -5,6 +5,8 @@ import com.github.sddisk.usernotesbackend.api.dto.user.UserResponseDto;
 import com.github.sddisk.usernotesbackend.service.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +18,11 @@ import java.util.UUID;
 public class UserController {
     private final UserService userService;
 
-    // @GetMapping("/me")
-    // @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/me")
+    @ResponseStatus(HttpStatus.OK)
+    public UserResponseDto current(@AuthenticationPrincipal UserDetails userDetails) {
+        return UserMapper.toDto(userService.getByEmail(userDetails.getUsername()));
+    }
 
     @GetMapping("/public")
     @ResponseStatus(HttpStatus.OK)
