@@ -48,6 +48,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getByEmail(String email) {
+        log.info("Fetch user with email: {}", email);
+        return userRepository.findByEmail(email).orElseThrow(
+                () -> new IllegalArgumentException("User not found with email " + email)
+        );
+    }
+
+    @Override
     public void deleteById(UUID id) {
         log.info("Deleting user with id: {}", id);
         userRepository.deleteById(id);
