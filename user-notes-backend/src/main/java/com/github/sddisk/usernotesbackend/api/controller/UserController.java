@@ -1,12 +1,11 @@
 package com.github.sddisk.usernotesbackend.api.controller;
 
-import com.github.sddisk.usernotesbackend.api.dto.user.UserMapper;
+import com.github.sddisk.usernotesbackend.api.dto.converter.UserMapper;
 import com.github.sddisk.usernotesbackend.api.dto.user.UserResponseDto;
 import com.github.sddisk.usernotesbackend.service.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +19,8 @@ public class UserController {
 
     @GetMapping("/me")
     @ResponseStatus(HttpStatus.OK)
-    public UserResponseDto current(@AuthenticationPrincipal UserDetails userDetails) {
-        return UserMapper.toDto(userService.getByEmail(userDetails.getUsername()));
+    public UserResponseDto current(@AuthenticationPrincipal(expression = "username") String username) {
+        return UserMapper.toDto(userService.getByEmail(username));
     }
 
     @GetMapping("/public")

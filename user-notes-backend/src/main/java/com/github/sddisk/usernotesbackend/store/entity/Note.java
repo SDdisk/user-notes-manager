@@ -1,5 +1,6 @@
 package com.github.sddisk.usernotesbackend.store.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,5 +19,11 @@ public class Note {
     private String title;
     private String content;
 
+    @Column(name = "pinned")
     private boolean isPinned;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JsonIgnore
+    private User user;
 }
