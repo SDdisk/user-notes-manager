@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.NaturalId;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ import java.util.UUID;
 @Getter @Setter
 @Builder @NoArgsConstructor @AllArgsConstructor
 @EqualsAndHashCode(of = "email")
-@ToString(exclude = "password")
+@ToString(exclude = {"password", "notes"})
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_id")
@@ -25,4 +26,7 @@ public class User {
     private String email;
     private String password;
     private Set<String> roles;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Note> notes = new HashSet<>();
 }

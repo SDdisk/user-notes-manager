@@ -41,6 +41,7 @@ public class SecurityConfiguration {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/users/public/**", "/users/me/**", "/auth/**").permitAll()
+                        .requestMatchers("/notes/**").hasRole("USER")
                         .requestMatchers("/users/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
