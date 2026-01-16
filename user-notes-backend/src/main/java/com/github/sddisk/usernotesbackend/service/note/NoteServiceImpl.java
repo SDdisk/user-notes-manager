@@ -1,5 +1,6 @@
 package com.github.sddisk.usernotesbackend.service.note;
 
+import com.github.sddisk.usernotesbackend.exception.NoteNotFoundException;
 import com.github.sddisk.usernotesbackend.service.user.UserService;
 import com.github.sddisk.usernotesbackend.service.user.current.CurrentUserService;
 import com.github.sddisk.usernotesbackend.store.entity.Note;
@@ -63,7 +64,7 @@ public class NoteServiceImpl implements NoteService {
                 .filter(note -> note.getId().equals(noteId))
                 .findFirst()
                 .orElseThrow(
-                        () ->  new IllegalArgumentException("User " + currentUser + "dont have a note with id " + noteId)
+                        () -> new NoteNotFoundException("User with email " + currentUser.getEmail() + " dont have a note with id " + noteId)
                 );
     }
 
@@ -98,7 +99,7 @@ public class NoteServiceImpl implements NoteService {
 
         if (note.isEmpty()) {
             log.error("Note with id {} not exist in user {}", noteId, currentUser);
-            throw new IllegalArgumentException("User " + currentUser + "dont have a note with id " + noteId);
+            throw new NoteNotFoundException("User with email " + currentUser.getEmail() + " dont have a note with id " + noteId);
         }
 
         log.info("Note deleted");

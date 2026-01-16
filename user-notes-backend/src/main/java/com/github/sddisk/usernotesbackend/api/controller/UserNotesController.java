@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/notes")
+@RequestMapping("/user-notes")
 @RequiredArgsConstructor
-public class NoteController {
+public class UserNotesController {
     private final NoteService noteService;
 
     @GetMapping("/all")

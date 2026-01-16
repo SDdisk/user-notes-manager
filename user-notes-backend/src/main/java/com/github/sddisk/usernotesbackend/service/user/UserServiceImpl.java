@@ -1,5 +1,7 @@
 package com.github.sddisk.usernotesbackend.service.user;
 
+import com.github.sddisk.usernotesbackend.exception.UserAlreadyExistException;
+import com.github.sddisk.usernotesbackend.exception.UserNotFoundException;
 import com.github.sddisk.usernotesbackend.store.entity.User;
 import com.github.sddisk.usernotesbackend.store.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +26,7 @@ public class UserServiceImpl implements UserService {
         log.info("Saving user: {}", user);
 
         if (userRepository.existsUserByEmail(user.getEmail())) {
-            throw new IllegalArgumentException("User with email " + user.getEmail() + "already exists"); // todo custom exception
+            throw new UserAlreadyExistException("User with email " + user.getEmail() + "already exists");
         }
 
         hashPassword(user);
@@ -43,7 +45,7 @@ public class UserServiceImpl implements UserService {
     public User getById(UUID id) {
         log.info("Fetch user with id: {}", id);
         return userRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("User not found with id " + id)
+                () -> new UserNotFoundException("User not found with id " + id)
         );
     }
 
@@ -51,7 +53,7 @@ public class UserServiceImpl implements UserService {
     public User getByEmail(String email) {
         log.info("Fetch user with email: {}", email);
         return userRepository.findByEmail(email).orElseThrow(
-                () -> new IllegalArgumentException("User not found with email " + email)
+                () -> new UserNotFoundException("User not found with email " + email)
         );
     }
 
