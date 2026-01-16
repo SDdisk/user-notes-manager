@@ -23,6 +23,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Component
@@ -59,7 +60,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private Optional<String> extractTokenFromHttpRequest(HttpServletRequest request) {
         var header = request.getHeader("Authorization");
 
-        if (header == null || !header.startsWith("Bearer ")) return Optional.empty();
+        if (header == null || !header.startsWith("Bearer ")) throw new MalformedJwtException("Authorization must be contain a bearer token");
 
         return Optional.of(header.substring(7));
     }
@@ -82,7 +83,7 @@ public class JwtFilter extends OncePerRequestFilter {
         response.setContentType("application/json");
         PrintWriter writer = response.getWriter();
         String jsonResponse = "{\"message\": \"" + e.getMessage() +
-                "\", \"timeStamp\": \"" + System.currentTimeMillis() + "\"}";
+                "\", \"timeStamp\": \"" + LocalDateTime.now() + "\"}";
         writer.write(jsonResponse);
         writer.flush();
 
