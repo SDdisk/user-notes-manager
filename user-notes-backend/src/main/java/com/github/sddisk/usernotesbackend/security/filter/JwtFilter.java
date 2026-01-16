@@ -60,9 +60,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private Optional<String> extractTokenFromHttpRequest(HttpServletRequest request) {
         var header = request.getHeader("Authorization");
 
-        if (header == null || !header.startsWith("Bearer ")) {
-            throw new MalformedJwtException("Authorization must be contain a bearer token");
-        }
+        if (header == null || !header.startsWith("Bearer ")) return Optional.empty();
 
         return Optional.of(header.substring(7));
     }
