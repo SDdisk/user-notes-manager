@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-create-note-table
+      author: artem
+      changes:
+        - createTable:
+            tableName: note_table
+            columns:
+              - column:
+                  name: note_id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: content
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pinned
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: note_table
+            baseColumnNames: user_id
+            referencedTableName: user_table
+            referencedColumnNames: user_id
+            constraintName: fk_notes_user
+            onDelete: CASCADE

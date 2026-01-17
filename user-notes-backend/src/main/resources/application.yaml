@@ -24,12 +24,16 @@ spring:
   jpa:
     database: h2
     hibernate:
-      ddl-auto: create-drop
-    defer-datasource-initialization: true # data.sql
+      ddl-auto: validate
+    defer-datasource-initialization: false # data.sql
     properties:
       hibernate:
         format_sql: true
         show_sql: true
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
 
 jwt:
   secret-key: "very-scary-secret-G8K7USA78JGEAw78ujeawtgr78UJHATEw78juhnaetW87NUJTAEW87juhatew8JU7H87UJH"
