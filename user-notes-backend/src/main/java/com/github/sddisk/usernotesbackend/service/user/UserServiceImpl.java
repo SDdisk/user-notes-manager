@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
-        log.info("Saving user: {}", user);
+        log.info("Save user with email {}", user.getEmail());
 
         if (userRepository.existsUserByEmail(user.getEmail())) {
             throw new UserAlreadyExistException("User with email " + user.getEmail() + "already exists");
@@ -32,6 +32,7 @@ public class UserServiceImpl implements UserService {
         hashPassword(user);
         setRoleUser(user);
 
+        log.debug("Saving user: {}", user);
         return userRepository.save(user);
     }
 
