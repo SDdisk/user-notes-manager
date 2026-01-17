@@ -25,7 +25,7 @@ spring:
     database: h2
     hibernate:
       ddl-auto: validate
-    defer-datasource-initialization: false # data.sql
+    defer-datasource-initialization: true # data.sql
     properties:
       hibernate:
         format_sql: true
