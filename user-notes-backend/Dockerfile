@@ -7,7 +7,6 @@ copy gradlew .
 copy build.gradle.kts .
 copy settings.gradle.kts .
 
-run chmod +x gradlew
 run ./gradlew --no-daemon dependencies
 
 copy src src
