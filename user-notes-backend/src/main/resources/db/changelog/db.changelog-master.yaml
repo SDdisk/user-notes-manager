@@ -3,3 +3,5 @@ databaseChangeLog:
         file: db/changelog/changes/001-create-user-table.yaml
     - include:
         file: db/changelog/changes/002-create-note-table.yaml
+    - include:
+        file: db/changelog/changes/003-insert-initial-users.sql
