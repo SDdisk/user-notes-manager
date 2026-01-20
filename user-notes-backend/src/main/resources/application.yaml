@@ -2,19 +2,15 @@ server:
   port: 8080
 
 spring:
-  h2:
-    console:
-      enabled: true
-      path: /h2
 
   application:
     name: user-notes-backend
 
   datasource:
-    url: "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+    url: "jdbc:postgresql://localhost:5432/user-notes-manager"
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
 
   security:
     user:
@@ -22,7 +18,7 @@ spring:
       password: password
 
   jpa:
-    database: h2
+    database: postgresql
     hibernate:
       ddl-auto: validate
     properties:
