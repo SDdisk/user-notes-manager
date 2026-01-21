@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest @ActiveProfiles("test")
 @ContextConfiguration(classes = UserNotesBackendApplication.class)
-@Testcontainers @AutoConfigureMockMvc @AutoConfigureJdbc
+@AutoConfigureMockMvc @AutoConfigureJdbc
 public class AuthIntegrationTest {
 
     @Autowired
