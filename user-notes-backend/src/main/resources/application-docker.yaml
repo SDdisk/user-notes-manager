@@ -1,0 +1,18 @@
+spring:
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://postgres:5432/user-notes-manager}
+    driver-class-name: ${DB_DRIVER_CLASSNAME:org.postgresql.Driver}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+
+  security:
+    user:
+      name: ${SECURITY_USERNAME:user}
+      password: ${SECURITY_PASSWORD:password}
+
+
+jwt:
+  secret-key: ${JWT_SECRET:mega-super-duper-hardest-secret-you-ever-seen-in-this-whole-verse-123}
+  access-lifetime: 36000000
+  refresh-lifetime: 604800000

@@ -1,6 +1,7 @@
 # project
 .idea
 user-notes-manager.iml
+.env
 
 ## user-notes-backend
 user-notes-backend/.gitignore

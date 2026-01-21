@@ -13,7 +13,7 @@ copy src src
 
 run ./gradlew --no-daemon bootJar -x test
 
-from eclipse-temurin:21-jre-alpine
+from eclipse-temurin:21-jre
 
 workdir /app
 
