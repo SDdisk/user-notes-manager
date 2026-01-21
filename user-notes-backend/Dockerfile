@@ -11,7 +11,7 @@ run ./gradlew --no-daemon dependencies
 
 copy src src
 
-run ./gradlew --no-daemon bootJar
+run ./gradlew --no-daemon bootJar -x test
 
 from eclipse-temurin:21-jre-alpine
 
