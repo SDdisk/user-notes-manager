@@ -32,5 +32,5 @@ spring:
 
 jwt:
   secret-key: "very-scary-secret-G8K7USA78JGEAw78ujeawtgr78UJHATEw78juhnaetW87NUJTAEW87juhatew8JU7H87UJH"
-  access-lifetime: 240000
-  refresh-lifetime: 24000000
+  access-lifetime: 240000 # 1 hour = 36000000
+  refresh-lifetime: 24000000 # 1 week = 604800000
