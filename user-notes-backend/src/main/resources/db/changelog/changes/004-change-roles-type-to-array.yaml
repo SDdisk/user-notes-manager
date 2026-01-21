@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-change-roles-to-array
+      author: artem
+      changes:
+        - modifyDataType:
+            tableName: user_table
+            columnName: roles
+            newDataType: text[]
