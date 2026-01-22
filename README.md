@@ -33,10 +33,32 @@ cp .env.example .env
 ```
 
 3. Edit the `.env` file with your values.
+```plaintext
+# DATABASE
+DB_USERNAME=your-db-username
+DB_PASSWORD=your-db-password
+DB_URL=jdbc:postgresql://postgres:5432/backend
+DB_DRIVER_CLASSNAME=org.postgresql.Driver
+
+# SECURITY
+SECURITY_USERNAME=your-security-username
+SECURITY_PASSWORD=your-security-password
+# JWT
+JWT_SECRET=your-secret-jwt-key-change-it-123-123-123-123
+
+# KAFKA
+KAFKA_BOOTSTRAP_SERVER=kafka:9090
+
+# MAIL_CREDS
+MAIL_USERNAME=your-email@gmail.com
+MAIL_PASSWORD=your-app-password
+```
+
 4. Start the application:
 ```bash
 docker compose up -d --build 
 ```
+
 5. Stop the application:
 ```bash
 docker compose down
