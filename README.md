@@ -1,13 +1,13 @@
-# <center> ˗ˏˋ User Notes Manager ˎˊ˗ </center>
+# ˗ˏˋ User Notes Manager ˎˊ˗
 _Simple web application for note management._
 
-## <center> 📁 Table of contents 📁 </center>
-**1.** [Key features](#center--key-features--center)</br>
-**2.** [Tech stack](#center--tech-stack--center)</br>
-**3.** [Database schema](#center--database-schema--center)</br>
-**4.** [Quickstart](#center--quickstart--center)</br>
+## 📁 Table of contents 📁
+**1.** [Key features](#-key-features-)</br>
+**2.** [Tech stack](#-tech-stack-)</br>
+**3.** [Database schema](#-database-schema-)</br>
+**4.** [Quickstart](#-quickstart-)</br>
 
-## <center> ✨ Key features ✨ </center>
+## ✨ Key features ✨
 ### User management:
 - 🔑 Registration and authentication with JWT
 - 👥 Role-based access control
@@ -18,7 +18,7 @@ _Simple web application for note management._
 ### Smart notifications
 - 📧 Send welcome email
 
-## <center> ⚙️ Tech Stack ⚙️ </center>
+## ⚙️ Tech Stack ⚙️
 | **Category**       | **Technologies**                                                 |
 |----------------|--------------------------------------------------------------|
 | **Backend**        | Java 21, Spring Boot 4, Web, Data JPA, Security, Kafka, Mail |
@@ -27,7 +27,7 @@ _Simple web application for note management._
 | **Build Tool**     | Gradle Kotlin DSL                                            |
 | **Testing**        | JUnit 5, Mockito, Testcontainers                             |
 
-## <center> 🖥 Database schema 🖥 </center>
+## 🖥 Database schema 🖥
 ```mermaid
 erDiagram
     USER_TABLE ||--o{ NOTE_TABLE : "creates"
@@ -53,7 +53,7 @@ erDiagram
     }
 ```
 
-## <center> ⚡ Quickstart ⚡ </center>
+## ⚡ Quickstart ⚡
 1. Clone repository:
 ```bash
 git clone https://github.com/SDdisk/user-notes-manager
