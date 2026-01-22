@@ -21,6 +21,32 @@ _Simple web application for note management._
 | **Build Tool**     | Gradle Kotlin DSL                                            |
 | **Testing**        | JUnit 5, Mockito, Testcontainers                             |
 
+## 🖥 Database schema 🖥
+```mermaid
+erDiagram
+    USER_TABLE ||--o{ NOTE_TABLE : "creates"
+    
+    USER_TABLE {
+        uuid user_id PK 
+        varchar username
+        varchar email UK
+        varchar password
+        varchar[] roles
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    NOTE_TABLE {
+        uuid note_id PK
+        varchar title 
+        text content 
+        boolean pinned 
+        uuid user_id FK 
+        timestamp created_at 
+        timestamp updated_at 
+    }
+```
+
 ## ⚡ Quickstart ⚡
 1. Clone repository:
 ```bash
