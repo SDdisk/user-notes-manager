@@ -33,7 +33,7 @@ cp .env.example .env
 ```
 
 3. Edit the `.env` file with your values.
-```plaintext
+```dotenv
 # DATABASE
 DB_USERNAME=your-db-username
 DB_PASSWORD=your-db-password
