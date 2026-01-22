@@ -7,3 +7,7 @@ databaseChangeLog:
         file: db/changelog/changes/003-insert-initial-users.sql
     - include:
         file: db/changelog/changes/004-change-roles-type-to-array.yaml
+#    - include:
+#        file: db/changelog/changes/005-add-new-rows-for-entities.yaml
+    - include:
+        file: db/changelog/changes/006-add-new-rows-for-entities.yaml

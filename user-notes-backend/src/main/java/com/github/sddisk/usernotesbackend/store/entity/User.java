@@ -13,9 +13,9 @@ import java.util.UUID;
 @Table(name = "user_table")
 @Getter @Setter
 @Builder @NoArgsConstructor @AllArgsConstructor
-@EqualsAndHashCode(of = "email")
+@EqualsAndHashCode(of = "email", callSuper = false)
 @ToString(exclude = {"password", "notes"})
-public class User {
+public class User extends Auditable {
     @Id @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_id")
     private UUID id;

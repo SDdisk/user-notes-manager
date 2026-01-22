@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-add-new-rows-for-entities
+      author: artem
+      changes:
+        - modifyDataType:
+            tableName: user_table
+            columnName: created_at
+            newDataType: timestamp
+        - modifyDataType:
+            tableName: user_table
+            columnName: updated_at
+            newDataType: timestamp
+        - modifyDataType:
+            tableName: note_table
+            columnName: created_at
+            newDataType: timestamp
+        - modifyDataType:
+            tableName: note_table
+            columnName: updated_at
+            newDataType: timestamp

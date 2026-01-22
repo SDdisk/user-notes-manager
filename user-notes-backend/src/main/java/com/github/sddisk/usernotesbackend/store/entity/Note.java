@@ -10,8 +10,8 @@ import java.util.UUID;
 @Table(name = "note_table")
 @Getter @Setter
 @Builder @NoArgsConstructor @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
-public class Note {
+@EqualsAndHashCode(of = "id", callSuper = false)
+public class Note extends Auditable {
     @Id @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "note_id")
     private UUID id;

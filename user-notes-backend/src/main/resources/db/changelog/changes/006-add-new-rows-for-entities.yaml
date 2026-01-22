@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 006-add-timestamp-columns
+      author: artem
+      changes:
+        - addColumn:
+            tableName: user_table
+            columns:
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - addColumn:
+            tableName: note_table
+            columns:
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
