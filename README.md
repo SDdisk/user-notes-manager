@@ -1,6 +1,12 @@
 # ˗ˏˋ User Notes Manager ˎˊ˗
 _Simple web application for note management._
 
+## 📁 Table of contents 📁
+**-** [Key features](#-key-features-)</br>
+**-** [Tech stack](#-tech-stack-)</br>
+**-** [Database schema](#-database-schema-)</br>
+**-** [Quickstart](#-quickstart-)</br>
+
 ## ✨ Key features ✨
 ### User management:
 - 🔑 Registration and authentication with JWT
