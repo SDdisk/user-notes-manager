@@ -2,10 +2,10 @@
 _Simple web application for note management._
 
 ## 📁 Table of contents 📁
-**-** [Key features](#-key-features-)</br>
-**-** [Tech stack](#-tech-stack-)</br>
-**-** [Database schema](#-database-schema-)</br>
-**-** [Quickstart](#-quickstart-)</br>
+**1.** [Key features](#-key-features-)</br>
+**2.** [Tech stack](#-tech-stack-)</br>
+**3.** [Database schema](#-database-schema-)</br>
+**4.** [Quickstart](#-quickstart-)</br>
 
 ## ✨ Key features ✨
 ### User management:
