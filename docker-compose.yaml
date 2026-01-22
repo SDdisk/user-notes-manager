@@ -30,6 +30,7 @@ services:
       - SECURITY_USERNAME=${SECURITY_USERNAME}
       - SECURITY_PASSWORD=${SECURITY_PASSWORD}
       - JWT_SECRET=${JWT_SECRET}
+      - KAFKA_BOOTSTRAP_SERVER=${KAFKA_BOOTSTRAP_SERVER}
 
   kafka:
     image: bitnamilegacy/kafka:latest

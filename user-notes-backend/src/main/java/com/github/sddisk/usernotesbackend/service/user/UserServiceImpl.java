@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
         log.info("Save user with email {}", user.getEmail());
 
         if (userRepository.existsUserByEmail(user.getEmail())) {
-            throw new UserAlreadyExistException("User with email " + user.getEmail() + "already exists");
+            throw new UserAlreadyExistException("User with email " + user.getEmail() + " already exists");
         }
 
         hashPassword(user);

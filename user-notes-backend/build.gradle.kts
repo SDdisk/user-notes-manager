@@ -41,6 +41,9 @@ dependencies {
     // db migration
     implementation("org.springframework.boot:spring-boot-starter-liquibase")
 
+    // kafka
+    implementation("org.springframework.boot:spring-boot-starter-kafka")
+
     // db drivers
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("com.h2database:h2")
@@ -56,10 +59,12 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
     testImplementation("org.springframework.boot:spring-boot-starter-security-test")
     testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
+    testImplementation("org.springframework.kafka:spring-kafka-test")
     // testcontainers
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
     testImplementation("org.testcontainers:testcontainers-junit-jupiter")
     testImplementation("org.testcontainers:postgresql:1.19.3")
+    testImplementation("org.testcontainers:kafka")
 
     // test runtime
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")

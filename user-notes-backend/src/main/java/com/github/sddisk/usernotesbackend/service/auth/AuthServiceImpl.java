@@ -5,6 +5,7 @@ import com.github.sddisk.usernotesbackend.api.dto.auth.LoginRequestDto;
 import com.github.sddisk.usernotesbackend.api.dto.auth.RegisterRequestDto;
 import com.github.sddisk.usernotesbackend.api.dto.converter.UserMapper;
 import com.github.sddisk.usernotesbackend.security.provider.JwtTokenProvider;
+import com.github.sddisk.usernotesbackend.service.kafka.KafkaEmailService;
 import com.github.sddisk.usernotesbackend.service.token.RefreshTokenService;
 import com.github.sddisk.usernotesbackend.service.user.UserService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ public class AuthServiceImpl implements AuthService {
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
     private final RefreshTokenService refreshTokenService;
+    private final KafkaEmailService emailService;
 
     @Override
     public AuthResponse register(RegisterRequestDto registerDto, HttpServletResponse response) {
@@ -34,6 +36,8 @@ public class AuthServiceImpl implements AuthService {
         var refreshToken = jwtTokenProvider.generateRefreshToken(saved.getEmail());
 
         refreshTokenService.createRefreshTokenCookie(refreshToken, response);
+
+        emailService.sendWelcomeEmail(saved.getEmail(), saved.getUsername());
 
         log.info("User successfully registered");
         return new AuthResponse(

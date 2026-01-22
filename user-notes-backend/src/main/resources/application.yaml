@@ -30,6 +30,9 @@ spring:
     enabled: true
     change-log: classpath:/db/changelog/db.changelog-master.yaml
 
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER:localhost:9092}
+
 jwt:
   secret-key: "very-scary-secret-G8K7USA78JGEAw78ujeawtgr78UJHATEw78juhnaetW87NUJTAEW87juhatew8JU7H87UJH"
   access-lifetime: 240000 # 1 hour = 36000000
