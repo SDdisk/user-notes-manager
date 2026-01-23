@@ -8,7 +8,7 @@ _Simple web application for note management._
 **4.** [Quickstart](#-quickstart-)</br>
 
 ## ✨ Key features ✨
-### User management:
+### User management
 - 🔑 Registration and authentication with JWT
 - 👥 Role-based access control
 ### Note management
