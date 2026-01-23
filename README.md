@@ -19,7 +19,7 @@ _Simple web application for note management._
 - ✖️ Delete notes
 ### Smart notifications
 - 📧 Send welcome email
-  <br/>
+<br/>
 
 ## ⚙️ Tech Stack ⚙️
 | **Category**       | **Technologies**                                                 |
