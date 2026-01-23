@@ -1,11 +1,13 @@
 # ˗ˏˋ User Notes Manager ˎˊ˗
 _Simple web application for note management._
+<br/>
 
 ## 📁 Table of contents 📁
 **1.** [Key features](#-key-features-)</br>
 **2.** [Tech stack](#-tech-stack-)</br>
 **3.** [Database schema](#-database-schema-)</br>
 **4.** [Quickstart](#-quickstart-)</br>
+<br/>
 
 ## ✨ Key features ✨
 ### User management
@@ -17,6 +19,7 @@ _Simple web application for note management._
 - ✖️ Delete notes
 ### Smart notifications
 - 📧 Send welcome email
+  <br/>
 
 ## ⚙️ Tech Stack ⚙️
 | **Category**       | **Technologies**                                                 |
@@ -26,6 +29,7 @@ _Simple web application for note management._
 | **Infrastructure** | Docker, Docker Compose                                       |
 | **Build Tool**     | Gradle Kotlin DSL                                            |
 | **Testing**        | JUnit 5, Mockito, Testcontainers                             |
+<br/>
 
 ## 🖥 Database schema 🖥
 ```mermaid
@@ -52,6 +56,7 @@ erDiagram
         timestamp updated_at 
     }
 ```
+<br/>
 
 ## ⚡ Quickstart ⚡
 1. Clone repository:
